@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aditya Bose | AI/ML Student</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6C63FF;
+            --secondary: #FF6584;
+            --accent: #42E2B8;
+            --dark: #0A0A0A;
+            --light: #F9F9F9;
+            --card-bg: rgba(255, 255, 255, 0.9);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 4rem 0 6rem;
+            text-align: center;
+            position: relative;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .tagline {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+        }
+        
+        section {
+            padding: 5rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary);
+            position: relative;
+            font-size: 2.5rem;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            margin: 1rem auto;
+            border-radius: 5px;
+        }
+        
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3rem;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.5s, box-shadow 0.5s;
+        }
+        
+        .about-text:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+        
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: center;
+        }
+        
+        .skill-card {
+            background: var(--card-bg);
+            padding: 1.5rem 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s ease;
+            min-width: 180px;
+        }
+        
+        .skill-card:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            background: white;
+        }
+        
+        .education-item, .hobby-item, .project-item {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .education-item:hover, .hobby-item:hover, .project-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+        
+        .education-item::before, .hobby-item::before, .project-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary), var(--accent));
+        }
+        
+        .education-item h3, .hobby-item h3, .project-item h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+        }
+        
+        .education-item p, .hobby-item p, .project-item p {
+            opacity: 0.8;
+            margin-bottom: 0.5rem;
+        }
+        
+        .education-item .date, .project-item .date {
+            display: inline-block;
+            background: rgba(108, 99, 255, 0.1);
+            color: var(--primary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+        
+        .hobbies-container, .projects-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .hobby-item {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
+        }
+        
+        .hobby-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--secondary);
+        }
+        
+        .projects-placeholder {
+            text-align: center;
+            padding: 3rem;
+            background: var(--card-bg);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        footer {
+            background: linear-gradient(135deg, var(--dark), #1a1a1a);
+            color: white;
+            text-align: center;
+            padding: 3rem 0;
+            margin-top: 2rem;
+            clip-path: polygon(0 15%, 100% 0, 100% 100%, 0 100%);
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.8rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .social-links a:hover {
+            color: var(--accent);
+            transform: translateY(-5px) scale(1.1);
+        }
+        
+        .btn {
+            display: inline-block;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(108, 99, 255, 0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(108, 99, 255, 0.4);
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .tagline {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .hobbies-container, .projects-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="animate__animated animate__fadeIn">
+        <div class="container">
+            <h1 class="animate__animated animate__fadeInDown">Aditya Bose</h1>
+            <p class="tagline animate__animated animate__fadeInDown animate__delay-1s">BTech Student | AI/ML Enthusiast | Programmer</p>
+            <div class="social-links animate__animated animate__fadeIn animate__delay-2s">
+                <a href="#" class="pulse"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" class="pulse"><i class="fab fa-github"></i></a>
+                <a href="#" class="pulse"><i class="fab fa-twitter"></i></a>
+                <a href="mailto:your.email@example.com" class="pulse"><i class="fas fa-envelope"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title animate__animated animate__fadeIn">About Me</h2>
+            <div class="about-content">
+                <div class="about-text animate__animated animate__fadeInLeft">
+                    <p>Hello! I'm Aditya Bose, a second-year BTech student specializing in Electronics and Communication Engineering with AI/ML at MIT World Peace University. I'm on track to graduate in 2027.</p>
+                    <p>Born on November 21, 2003, I'm passionate about coding, problem-solving, and exploring the fascinating world of artificial intelligence and machine learning. I'm fluent in Hindi, English, and Bengali, which helps me communicate effectively in diverse environments.</p>
+                    <p>When I'm not coding, you can find me at the gym, immersed in a good book, or enjoying movies and video games.</p>
+                    <a href="#contact" class="btn">Get In Touch</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title animate__animated animate__fadeIn">Technical Skills</h2>
+            <div class="skills">
+                <div class="skill-card animate__animated animate__fadeInUp animate__delay-1s">
+                    <i class="fab fa-java fa-2x" style="color: #007396;"></i>
+                    <span>Java</span>
+                </div>
+                <div class="skill-card animate__animated animate__fadeInUp animate__delay-2s">
+                    <i class="fas fa-code fa-2x" style="color: #555;"></i>
+                    <span>C</span>
+                </div>
+                <div class="skill-card animate__animated animate__fadeInUp animate__delay-3s">
+                    <i class="fas fa-code fa-2x" style="color: #00599C;"></i>
+                    <span>C++</span>
+                </div>
+                <div class="skill-card animate__animated animate__fadeInUp animate__delay-4s">
+                    <i class="fab fa-python fa-2x" style="color: #3776AB;"></i>
+                    <span>Python</span>
+                </div>
+                <div class="skill-card animate__animated animate__fadeInUp animate__delay-5s">
+                    <i class="fas fa-robot fa-2x" style="color: #FF6F61;"></i>
+                    <span>AI/ML</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="education">
+        <div class="container">
+            <h2 class="section-title animate__animated animate__fadeIn">Education</h2>
+            <div class="education-item animate__animated animate__fadeInRight">
+                <h3>Bachelor of Technology (BTech) in ECE with AI/ML</h3>
+                <p>MIT World Peace University | 2022 - 2027</p>
+                <p>Currently in second year</p>
+                <span class="date">Expected Graduation: 2027</span>
+            </div>
+            <div class="education-item animate__animated animate__fadeInRight animate__delay-1s">
+                <h3>12th Grade (Senior Secondary)</h3>
+                <p>DAV Public School, Hehal, Ranchi | 2020 - 2022</p>
+                <p>Percentage: 87%</p>
+                <span class="date">2020 - 2022</span>
+            </div>
+            <div class="education-item animate__animated animate__fadeInRight animate__delay-2s">
+                <h3>10th Grade (Secondary)</h3>
+                <p>St. Thomas School, Ranchi | Completed in 2020</p>
+                <p>Percentage: 95%</p>
+                <span class="date">Completed: 2020</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title animate__animated animate__fadeIn">Projects</h2>
+            <div class="projects-container">
+                <div class="projects-placeholder animate__animated animate__fadeIn">
+                    <i class="fas fa-code-branch fa-4x" style="color: var(--secondary); margin-bottom: 1.5rem;"></i>
+                    <h3>My Projects</h3>
+                    <p>I'm currently working on building my portfolio of projects. Check back soon to see my work!</p>
+                    <p>In the meantime, you can see my learning progress on GitHub.</p>
+                    <a href="#" class="btn">My GitHub</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="hobbies">
+        <div class="container">
+            <h2 class="section-title animate__animated animate__fadeIn">Hobbies & Interests</h2>
+            <div class="hobbies-container">
+                <div class="hobby-item animate__animated animate__fadeInUp">
+                    <div class="hobby-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3>Coding</h3>
+                    <p>Passionate about solving problems and building projects through code</p>
+                </div>
+                <div class="hobby-item animate__animated animate__fadeInUp animate__delay-1s">
+                    <div class="hobby-icon">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <h3>Gaming</h3>
+                    <p>Enjoy strategic and immersive video games</p>
+                </div>
+                <div class="hobby-item animate__animated animate__fadeInUp animate__delay-2s">
+                    <div class="hobby-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h3>Reading</h3>
+                    <p>Love exploring different genres of books</p>
+                </div>
+                <div class="hobby-item animate__animated animate__fadeInUp animate__delay-3s">
+                    <div class="hobby-icon">
+                        <i class="fas fa-film"></i>
+                    </div>
+                    <h3>Movies</h3>
+                    <p>Enjoy watching and analyzing films</p>
+                </div>
+                <div class="hobby-item animate__animated animate__fadeInUp animate__delay-4s">
+                    <div class="hobby-icon">
+                        <i class="fas fa-dumbbell"></i>
+                    </div>
+                    <h3>Gym</h3>
+                    <p>Committed to fitness and physical health</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="container">
+            <h2 class="animate__animated animate__fadeIn" style="color: white; margin-bottom: 1rem;">Let's Connect</h2>
+            <p class="animate__animated animate__fadeIn animate__delay-1s">Feel free to reach out for collaborations or just to say hello!</p>
+            <div class="social-links animate__animated animate__fadeIn animate__delay-2s">
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="mailto:your.email@example.com"><i class="fas fa-envelope"></i></a>
+            </div>
+            <p class="animate__animated animate__fadeIn animate__delay-3s" style="margin-top: 2rem;">&copy; 2023 Aditya Bose. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Simple animation trigger on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const animateElements = document.querySelectorAll('.animate__animated');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const animation = entry.target.getAttribute('data-animate');
+                        entry.target.style.visibility = 'visible';
+                        entry.target.classList.add(animation);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            animateElements.forEach(element => {
+                element.style.visibility = 'hidden';
+                const animation = element.classList.contains('animate__fadeIn') ? 'animate__fadeIn' : 
+                                element.classList.contains('animate__fadeInDown') ? 'animate__fadeInDown' :
+                                element.classList.contains('animate__fadeInLeft') ? 'animate__fadeInLeft' :
+                                element.classList.contains('animate__fadeInRight') ? 'animate__fadeInRight' :
+                                element.classList.contains('animate__fadeInUp') ? 'animate__fadeInUp' : 'animate__fadeIn';
+                element.setAttribute('data-animate', animation);
+                observer.observe(element);
+            });
+        });
+    </script>
+</body>
+</html>

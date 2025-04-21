@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aditya Bose | AI/ML Student</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -13,55 +12,103 @@
             --accent: #42E2B8;
             --dark: #0A0A0A;
             --light: #F9F9F9;
-            --card-bg: rgba(255, 255, 255, 0.9);
+            --card-bg: rgba(255, 255, 255, 0.95);
         }
         
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
         }
         
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
         
-        body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            color: var(--dark);
-            line-height: 1.6;
+        html {
+            scroll-behavior: smooth;
             overflow-x: hidden;
         }
         
-        header {
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            perspective: 1000px;
+        }
+        
+        /* Full-page sections */
+        .page {
+            min-height: 100vh;
+            width: 100vw;
+            padding: 5rem 0;
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1s ease-out;
+            opacity: 0;
+            transform: translateY(50px) rotateX(10deg);
+        }
+        
+        .page.active {
+            opacity: 1;
+            transform: translateY(0) rotateX(0);
+        }
+        
+        .page:not(.active) {
+            pointer-events: none;
+        }
+        
+        /* Header Section */
+        #header {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
-            padding: 4rem 0 6rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
             position: relative;
-            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+            z-index: 10;
+        }
+        
+        #header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: var(--light);
+            clip-path: polygon(0 0, 100% 20%, 100% 100%, 0 100%);
+            z-index: -1;
+        }
+        
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            font-weight: 700;
+        }
+        
+        .tagline {
+            font-size: clamp(1.2rem, 2vw, 1.8rem);
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            font-weight: 300;
+            max-width: 700px;
+            padding: 0 2rem;
         }
         
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 2rem;
-        }
-        
-        h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-        }
-        
-        .tagline {
-            font-size: 1.5rem;
-            opacity: 0.9;
-            margin-bottom: 1.5rem;
-            font-weight: 300;
-        }
-        
-        section {
-            padding: 5rem 0;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
         
         .section-title {
@@ -69,17 +116,30 @@
             margin-bottom: 3rem;
             color: var(--primary);
             position: relative;
-            font-size: 2.5rem;
+            font-size: clamp(2rem, 4vw, 3rem);
         }
         
         .section-title::after {
             content: '';
             display: block;
-            width: 100px;
+            width: 80px;
             height: 5px;
             background: linear-gradient(to right, var(--primary), var(--accent));
-            margin: 1rem auto;
+            margin: 1.5rem auto;
             border-radius: 5px;
+            transform: scaleX(0);
+            transform-origin: center;
+            transition: transform 0.8s cubic-bezier(0.86, 0, 0.07, 1);
+        }
+        
+        .active .section-title::after {
+            transform: scaleX(1);
+        }
+        
+        /* About Section */
+        #about {
+            background-color: var(--light);
+            z-index: 9;
         }
         
         .about-content {
@@ -94,59 +154,83 @@
             flex: 1;
             min-width: 300px;
             background: var(--card-bg);
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: transform 0.5s, box-shadow 0.5s;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateX(-50px);
+            opacity: 0;
         }
         
-        .about-text:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        .active .about-text {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        
+        /* Skills Section */
+        #skills {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            z-index: 8;
         }
         
         .skills {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-            justify-content: center;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
         }
         
         .skill-card {
             background: var(--card-bg);
-            padding: 1.5rem 2rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            transition: all 0.3s ease;
-            min-width: 180px;
-        }
-        
-        .skill-card:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            background: white;
-        }
-        
-        .education-item, .hobby-item, .project-item {
-            background: var(--card-bg);
             padding: 2rem;
             border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateY(30px);
+            opacity: 0;
+        }
+        
+        .skill-card i {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .active .skill-card {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .active .skill-card:nth-child(1) { transition-delay: 0.1s; }
+        .active .skill-card:nth-child(2) { transition-delay: 0.2s; }
+        .active .skill-card:nth-child(3) { transition-delay: 0.3s; }
+        .active .skill-card:nth-child(4) { transition-delay: 0.4s; }
+        .active .skill-card:nth-child(5) { transition-delay: 0.5s; }
+        
+        /* Education Section */
+        #education {
+            background-color: var(--light);
+            z-index: 7;
+        }
+        
+        .education-item {
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
             margin-bottom: 2rem;
-            transition: all 0.3s ease;
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateX(50px);
+            opacity: 0;
             position: relative;
             overflow: hidden;
         }
         
-        .education-item:hover, .hobby-item:hover, .project-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-        }
-        
-        .education-item::before, .hobby-item::before, .project-item::before {
+        .education-item::before {
             content: '';
             position: absolute;
             top: 0;
@@ -156,211 +240,285 @@
             background: linear-gradient(to bottom, var(--primary), var(--accent));
         }
         
-        .education-item h3, .hobby-item h3, .project-item h3 {
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-            font-size: 1.5rem;
+        .active .education-item {
+            transform: translateX(0);
+            opacity: 1;
         }
         
-        .education-item p, .hobby-item p, .project-item p {
-            opacity: 0.8;
-            margin-bottom: 0.5rem;
-        }
+        .active .education-item:nth-child(1) { transition-delay: 0.2s; }
+        .active .education-item:nth-child(2) { transition-delay: 0.4s; }
+        .active .education-item:nth-child(3) { transition-delay: 0.6s; }
         
-        .education-item .date, .project-item .date {
-            display: inline-block;
-            background: rgba(108, 99, 255, 0.1);
-            color: var(--primary);
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
-        }
-        
-        .hobbies-container, .projects-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-        
-        .hobby-item {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            text-align: left;
-        }
-        
-        .hobby-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-            color: var(--secondary);
+        /* Projects Section */
+        #projects {
+            background: linear-gradient(135deg, #e4e8f0 0%, #d5dbe8 100%);
+            z-index: 6;
         }
         
         .projects-placeholder {
             text-align: center;
-            padding: 3rem;
+            padding: 4rem;
             background: var(--card-bg);
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: scale(0.9);
+            opacity: 0;
         }
         
-        footer {
+        .active .projects-placeholder {
+            transform: scale(1);
+            opacity: 1;
+        }
+        
+        /* Hobbies Section */
+        #hobbies {
+            background-color: var(--light);
+            z-index: 5;
+        }
+        
+        .hobbies-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .hobby-item {
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateY(30px);
+            opacity: 0;
+            text-align: center;
+        }
+        
+        .active .hobby-item {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .active .hobby-item:nth-child(1) { transition-delay: 0.1s; }
+        .active .hobby-item:nth-child(2) { transition-delay: 0.2s; }
+        .active .hobby-item:nth-child(3) { transition-delay: 0.3s; }
+        .active .hobby-item:nth-child(4) { transition-delay: 0.4s; }
+        .active .hobby-item:nth-child(5) { transition-delay: 0.5s; }
+        
+        /* Footer Section */
+        #footer {
             background: linear-gradient(135deg, var(--dark), #1a1a1a);
             color: white;
             text-align: center;
-            padding: 3rem 0;
-            margin-top: 2rem;
-            clip-path: polygon(0 15%, 100% 0, 100% 100%, 0 100%);
+            clip-path: polygon(0 10%, 100% 0, 100% 100%, 0 100%);
+            position: relative;
+            z-index: 4;
+            padding: 6rem 0 3rem;
         }
         
-        .social-links {
+        /* Navigation Dots */
+        .nav-dots {
+            position: fixed;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
             display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin: 2rem 0;
+            flex-direction: column;
+            gap: 15px;
         }
         
-        .social-links a {
-            color: white;
-            font-size: 1.8rem;
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(108, 99, 255, 0.3);
+            cursor: pointer;
             transition: all 0.3s ease;
-            display: inline-block;
+            position: relative;
         }
         
-        .social-links a:hover {
-            color: var(--accent);
-            transform: translateY(-5px) scale(1.1);
+        .dot::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border: 1px solid var(--primary);
+            border-radius: 50%;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.3s ease;
         }
         
+        .dot.active {
+            background-color: var(--primary);
+            transform: scale(1.2);
+        }
+        
+        .dot.active::after {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        /* Buttons */
         .btn {
             display: inline-block;
             background: linear-gradient(to right, var(--primary), var(--secondary));
             color: white;
-            padding: 0.8rem 2rem;
+            padding: 1rem 2.5rem;
             border-radius: 50px;
             text-decoration: none;
             font-weight: 500;
-            margin-top: 1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(108, 99, 255, 0.3);
+            margin-top: 1.5rem;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 10px 20px rgba(108, 99, 255, 0.3);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            position: relative;
+            overflow: hidden;
         }
         
         .btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(108, 99, 255, 0.4);
+            box-shadow: 0 15px 30px rgba(108, 99, 255, 0.4);
         }
         
-        .floating {
-            animation: floating 3s ease-in-out infinite;
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, var(--secondary), var(--primary));
+            opacity: 0;
+            transition: opacity 0.4s ease;
         }
         
-        @keyframes floating {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-            100% { transform: translateY(0px); }
+        .btn:hover::before {
+            opacity: 1;
         }
         
-        .pulse {
-            animation: pulse 2s infinite;
+        .btn span {
+            position: relative;
+            z-index: 1;
         }
         
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        
+        /* Responsive Design */
         @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5rem;
+            .nav-dots {
+                display: none;
             }
             
-            .tagline {
-                font-size: 1.2rem;
+            .page {
+                padding: 3rem 0;
             }
             
-            .section-title {
-                font-size: 2rem;
+            .about-text, .education-item {
+                padding: 2rem;
             }
             
-            .hobbies-container, .projects-container {
-                grid-template-columns: 1fr;
+            .skills {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+            
+            #footer {
+                clip-path: polygon(0 5%, 100% 0, 100% 100%, 0 100%);
             }
         }
     </style>
 </head>
 <body>
-    <header class="animate__animated animate__fadeIn">
-        <div class="container">
-            <h1 class="animate__animated animate__fadeInDown">Aditya Bose</h1>
-            <p class="tagline animate__animated animate__fadeInDown animate__delay-1s">BTech Student | AI/ML Enthusiast | Programmer</p>
-            <div class="social-links animate__animated animate__fadeIn animate__delay-2s">
-                <a href="#" class="pulse"><i class="fab fa-linkedin-in"></i></a>
-                <a href="#" class="pulse"><i class="fab fa-github"></i></a>
-                <a href="#" class="pulse"><i class="fab fa-twitter"></i></a>
-                <a href="mailto:your.email@example.com" class="pulse"><i class="fas fa-envelope"></i></a>
-            </div>
-        </div>
-    </header>
+    <!-- Navigation Dots -->
+    <div class="nav-dots">
+        <div class="dot active" data-section="header"></div>
+        <div class="dot" data-section="about"></div>
+        <div class="dot" data-section="skills"></div>
+        <div class="dot" data-section="education"></div>
+        <div class="dot" data-section="projects"></div>
+        <div class="dot" data-section="hobbies"></div>
+        <div class="dot" data-section="footer"></div>
+    </div>
 
-    <section id="about">
+    <!-- Header Section -->
+    <section id="header" class="page active">
         <div class="container">
-            <h2 class="section-title animate__animated animate__fadeIn">About Me</h2>
+            <h1>Aditya Bose</h1>
+            <p class="tagline">BTech Student | AI/ML Enthusiast | Programmer</p>
+            <div class="social-links">
+                <a href="#" class="btn btn-icon"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" class="btn btn-icon"><i class="fab fa-github"></i></a>
+                <a href="#" class="btn btn-icon"><i class="fab fa-twitter"></i></a>
+                <a href="mailto:your.email@example.com" class="btn btn-icon"><i class="fas fa-envelope"></i></a>
+            </div>
+            <a href="#about" class="btn scroll-btn">Explore My Journey <i class="fas fa-arrow-down"></i></a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="page">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
             <div class="about-content">
-                <div class="about-text animate__animated animate__fadeInLeft">
+                <div class="about-text">
                     <p>Hello! I'm Aditya Bose, a second-year BTech student specializing in Electronics and Communication Engineering with AI/ML at MIT World Peace University. I'm on track to graduate in 2027.</p>
                     <p>Born on November 21, 2003, I'm passionate about coding, problem-solving, and exploring the fascinating world of artificial intelligence and machine learning. I'm fluent in Hindi, English, and Bengali, which helps me communicate effectively in diverse environments.</p>
                     <p>When I'm not coding, you can find me at the gym, immersed in a good book, or enjoying movies and video games.</p>
-                    <a href="#contact" class="btn">Get In Touch</a>
+                    <a href="#skills" class="btn">My Skills <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="skills">
+    <!-- Skills Section -->
+    <section id="skills" class="page">
         <div class="container">
-            <h2 class="section-title animate__animated animate__fadeIn">Technical Skills</h2>
+            <h2 class="section-title">Technical Skills</h2>
             <div class="skills">
-                <div class="skill-card animate__animated animate__fadeInUp animate__delay-1s">
-                    <i class="fab fa-java fa-2x" style="color: #007396;"></i>
+                <div class="skill-card">
+                    <i class="fab fa-java" style="color: #007396;"></i>
                     <span>Java</span>
                 </div>
-                <div class="skill-card animate__animated animate__fadeInUp animate__delay-2s">
-                    <i class="fas fa-code fa-2x" style="color: #555;"></i>
+                <div class="skill-card">
+                    <i class="fas fa-code" style="color: #555;"></i>
                     <span>C</span>
                 </div>
-                <div class="skill-card animate__animated animate__fadeInUp animate__delay-3s">
-                    <i class="fas fa-code fa-2x" style="color: #00599C;"></i>
+                <div class="skill-card">
+                    <i class="fas fa-code" style="color: #00599C;"></i>
                     <span>C++</span>
                 </div>
-                <div class="skill-card animate__animated animate__fadeInUp animate__delay-4s">
-                    <i class="fab fa-python fa-2x" style="color: #3776AB;"></i>
+                <div class="skill-card">
+                    <i class="fab fa-python" style="color: #3776AB;"></i>
                     <span>Python</span>
                 </div>
-                <div class="skill-card animate__animated animate__fadeInUp animate__delay-5s">
-                    <i class="fas fa-robot fa-2x" style="color: #FF6F61;"></i>
+                <div class="skill-card">
+                    <i class="fas fa-robot" style="color: #FF6F61;"></i>
                     <span>AI/ML</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="education">
+    <!-- Education Section -->
+    <section id="education" class="page">
         <div class="container">
-            <h2 class="section-title animate__animated animate__fadeIn">Education</h2>
-            <div class="education-item animate__animated animate__fadeInRight">
+            <h2 class="section-title">Education</h2>
+            <div class="education-item">
                 <h3>Bachelor of Technology (BTech) in ECE with AI/ML</h3>
                 <p>MIT World Peace University | 2022 - 2027</p>
                 <p>Currently in second year</p>
                 <span class="date">Expected Graduation: 2027</span>
             </div>
-            <div class="education-item animate__animated animate__fadeInRight animate__delay-1s">
+            <div class="education-item">
                 <h3>12th Grade (Senior Secondary)</h3>
                 <p>DAV Public School, Hehal, Ranchi | 2020 - 2022</p>
                 <p>Percentage: 87%</p>
                 <span class="date">2020 - 2022</span>
             </div>
-            <div class="education-item animate__animated animate__fadeInRight animate__delay-2s">
+            <div class="education-item">
                 <h3>10th Grade (Secondary)</h3>
                 <p>St. Thomas School, Ranchi | Completed in 2020</p>
                 <p>Percentage: 95%</p>
@@ -369,54 +527,54 @@
         </div>
     </section>
 
-    <section id="projects">
+    <!-- Projects Section -->
+    <section id="projects" class="page">
         <div class="container">
-            <h2 class="section-title animate__animated animate__fadeIn">Projects</h2>
-            <div class="projects-container">
-                <div class="projects-placeholder animate__animated animate__fadeIn">
-                    <i class="fas fa-code-branch fa-4x" style="color: var(--secondary); margin-bottom: 1.5rem;"></i>
-                    <h3>My Projects</h3>
-                    <p>I'm currently working on building my portfolio of projects. Check back soon to see my work!</p>
-                    <p>In the meantime, you can see my learning progress on GitHub.</p>
-                    <a href="#" class="btn">My GitHub</a>
-                </div>
+            <h2 class="section-title">Projects</h2>
+            <div class="projects-placeholder">
+                <i class="fas fa-code-branch fa-4x" style="color: var(--secondary); margin-bottom: 1.5rem;"></i>
+                <h3>My Projects</h3>
+                <p>I'm currently working on building my portfolio of projects. Check back soon to see my work!</p>
+                <p>In the meantime, you can see my learning progress on GitHub.</p>
+                <a href="#" class="btn">My GitHub</a>
             </div>
         </div>
     </section>
 
-    <section id="hobbies">
+    <!-- Hobbies Section -->
+    <section id="hobbies" class="page">
         <div class="container">
-            <h2 class="section-title animate__animated animate__fadeIn">Hobbies & Interests</h2>
+            <h2 class="section-title">Hobbies & Interests</h2>
             <div class="hobbies-container">
-                <div class="hobby-item animate__animated animate__fadeInUp">
+                <div class="hobby-item">
                     <div class="hobby-icon">
                         <i class="fas fa-laptop-code"></i>
                     </div>
                     <h3>Coding</h3>
                     <p>Passionate about solving problems and building projects through code</p>
                 </div>
-                <div class="hobby-item animate__animated animate__fadeInUp animate__delay-1s">
+                <div class="hobby-item">
                     <div class="hobby-icon">
                         <i class="fas fa-gamepad"></i>
                     </div>
                     <h3>Gaming</h3>
                     <p>Enjoy strategic and immersive video games</p>
                 </div>
-                <div class="hobby-item animate__animated animate__fadeInUp animate__delay-2s">
+                <div class="hobby-item">
                     <div class="hobby-icon">
                         <i class="fas fa-book-open"></i>
                     </div>
                     <h3>Reading</h3>
                     <p>Love exploring different genres of books</p>
                 </div>
-                <div class="hobby-item animate__animated animate__fadeInUp animate__delay-3s">
+                <div class="hobby-item">
                     <div class="hobby-icon">
                         <i class="fas fa-film"></i>
                     </div>
                     <h3>Movies</h3>
                     <p>Enjoy watching and analyzing films</p>
                 </div>
-                <div class="hobby-item animate__animated animate__fadeInUp animate__delay-4s">
+                <div class="hobby-item">
                     <div class="hobby-icon">
                         <i class="fas fa-dumbbell"></i>
                     </div>
@@ -427,47 +585,112 @@
         </div>
     </section>
 
-    <footer id="contact">
+    <!-- Footer Section -->
+    <section id="footer" class="page">
         <div class="container">
-            <h2 class="animate__animated animate__fadeIn" style="color: white; margin-bottom: 1rem;">Let's Connect</h2>
-            <p class="animate__animated animate__fadeIn animate__delay-1s">Feel free to reach out for collaborations or just to say hello!</p>
-            <div class="social-links animate__animated animate__fadeIn animate__delay-2s">
+            <h2 style="color: white; margin-bottom: 1.5rem;">Let's Connect</h2>
+            <p style="margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">Feel free to reach out for collaborations or just to say hello!</p>
+            <div class="social-links">
                 <a href="#"><i class="fab fa-linkedin-in"></i></a>
                 <a href="#"><i class="fab fa-github"></i></a>
                 <a href="#"><i class="fab fa-twitter"></i></a>
                 <a href="mailto:your.email@example.com"><i class="fas fa-envelope"></i></a>
             </div>
-            <p class="animate__animated animate__fadeIn animate__delay-3s" style="margin-top: 2rem;">&copy; 2023 Aditya Bose. All rights reserved.</p>
+            <p style="margin-top: 3rem;">&copy; 2023 Aditya Bose. All rights reserved.</p>
         </div>
-    </footer>
+    </section>
 
     <script>
-        // Simple animation trigger on scroll
         document.addEventListener('DOMContentLoaded', function() {
-            const animateElements = document.querySelectorAll('.animate__animated');
+            const pages = document.querySelectorAll('.page');
+            const dots = document.querySelectorAll('.dot');
+            let currentPage = 0;
+            
+            // Initialize first page
+            pages[0].classList.add('active');
+            dots[0].classList.add('active');
+            
+            // Scroll animation setup
+            function handleScroll() {
+                const scrollPosition = window.scrollY + (window.innerHeight / 2);
+                
+                pages.forEach((page, index) => {
+                    const pageTop = page.offsetTop;
+                    const pageHeight = page.offsetHeight;
+                    
+                    if (scrollPosition >= pageTop && scrollPosition < pageTop + pageHeight) {
+                        if (currentPage !== index) {
+                            currentPage = index;
+                            updateActiveDot();
+                        }
+                        page.classList.add('active');
+                    }
+                });
+            }
+            
+            // Update active dot
+            function updateActiveDot() {
+                dots.forEach((dot, index) => {
+                    if (index === currentPage) {
+                        dot.classList.add('active');
+                    } else {
+                        dot.classList.remove('active');
+                    }
+                });
+            }
+            
+            // Dot navigation
+            dots.forEach(dot => {
+                dot.addEventListener('click', function() {
+                    const section = this.getAttribute('data-section');
+                    const targetPage = document.getElementById(section);
+                    
+                    window.scrollTo({
+                        top: targetPage.offsetTop,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+            
+            // Smooth scroll for buttons
+            document.querySelectorAll('.scroll-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetPage = document.querySelector(targetId);
+                    
+                    window.scrollTo({
+                        top: targetPage.offsetTop,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+            
+            // Handle scroll events with debounce
+            let isScrolling;
+            window.addEventListener('scroll', function() {
+                window.clearTimeout(isScrolling);
+                isScrolling = setTimeout(handleScroll, 100);
+            }, false);
+            
+            // Initialize scroll position
+            handleScroll();
+            
+            // Add intersection observer for more precise animations
+            const observerOptions = {
+                threshold: 0.1
+            };
             
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        const animation = entry.target.getAttribute('data-animate');
-                        entry.target.style.visibility = 'visible';
-                        entry.target.classList.add(animation);
-                        observer.unobserve(entry.target);
+                        entry.target.classList.add('active');
                     }
                 });
-            }, {
-                threshold: 0.1
-            });
+            }, observerOptions);
             
-            animateElements.forEach(element => {
-                element.style.visibility = 'hidden';
-                const animation = element.classList.contains('animate__fadeIn') ? 'animate__fadeIn' : 
-                                element.classList.contains('animate__fadeInDown') ? 'animate__fadeInDown' :
-                                element.classList.contains('animate__fadeInLeft') ? 'animate__fadeInLeft' :
-                                element.classList.contains('animate__fadeInRight') ? 'animate__fadeInRight' :
-                                element.classList.contains('animate__fadeInUp') ? 'animate__fadeInUp' : 'animate__fadeIn';
-                element.setAttribute('data-animate', animation);
-                observer.observe(element);
+            pages.forEach(page => {
+                observer.observe(page);
             });
         });
     </script>

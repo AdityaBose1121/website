@@ -10,9 +10,10 @@
             --primary: #6C63FF;
             --secondary: #FF6584;
             --accent: #42E2B8;
-            --dark: #0A0A0A;
-            --light: #F9F9F9;
-            --card-bg: rgba(255, 255, 255, 0.95);
+            --dark: #121212;
+            --darker: #0A0A0A;
+            --light: #E0E0E0;
+            --card-bg: rgba(30, 30, 30, 0.8);
         }
         
         * {
@@ -30,11 +31,22 @@
         }
         
         body {
-            background-color: var(--light);
-            color: var(--dark);
+            background-color: var(--darker);
+            color: var(--light);
             line-height: 1.6;
             overflow-x: hidden;
             perspective: 1000px;
+        }
+        
+        /* Anime Particle Background */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
         }
         
         /* Full-page sections */
@@ -61,7 +73,7 @@
         
         /* Header Section */
         #header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background: linear-gradient(135deg, rgba(108, 99, 255, 0.8), rgba(255, 101, 132, 0.8));
             color: white;
             display: flex;
             flex-direction: column;
@@ -71,6 +83,7 @@
             clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
             position: relative;
             z-index: 10;
+            backdrop-filter: blur(5px);
         }
         
         #header::after {
@@ -80,7 +93,7 @@
             left: 0;
             width: 100%;
             height: 100px;
-            background: var(--light);
+            background: var(--darker);
             clip-path: polygon(0 0, 100% 20%, 100% 100%, 0 100%);
             z-index: -1;
         }
@@ -88,7 +101,7 @@
         h1 {
             font-size: clamp(2.5rem, 5vw, 4rem);
             margin-bottom: 1.5rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
             font-weight: 700;
         }
         
@@ -114,7 +127,7 @@
         .section-title {
             text-align: center;
             margin-bottom: 3rem;
-            color: var(--primary);
+            color: var(--accent);
             position: relative;
             font-size: clamp(2rem, 4vw, 3rem);
         }
@@ -138,8 +151,9 @@
         
         /* About Section */
         #about {
-            background-color: var(--light);
+            background-color: rgba(18, 18, 18, 0.7);
             z-index: 9;
+            backdrop-filter: blur(5px);
         }
         
         .about-content {
@@ -156,10 +170,11 @@
             background: var(--card-bg);
             padding: 3rem;
             border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
             transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
             transform: translateX(-50px);
             opacity: 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .active .about-text {
@@ -169,8 +184,9 @@
         
         /* Skills Section */
         #skills {
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            background: rgba(30, 30, 30, 0.7);
             z-index: 8;
+            backdrop-filter: blur(5px);
         }
         
         .skills {
@@ -185,7 +201,7 @@
             background: var(--card-bg);
             padding: 2rem;
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -193,6 +209,7 @@
             transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
             transform: translateY(30px);
             opacity: 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .skill-card i {
@@ -213,21 +230,23 @@
         
         /* Education Section */
         #education {
-            background-color: var(--light);
+            background-color: rgba(18, 18, 18, 0.7);
             z-index: 7;
+            backdrop-filter: blur(5px);
         }
         
         .education-item {
             background: var(--card-bg);
             padding: 2.5rem;
             border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
             margin-bottom: 2rem;
             transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
             transform: translateX(50px);
             opacity: 0;
             position: relative;
             overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .education-item::before {
@@ -251,8 +270,9 @@
         
         /* Projects Section */
         #projects {
-            background: linear-gradient(135deg, #e4e8f0 0%, #d5dbe8 100%);
+            background: rgba(30, 30, 30, 0.7);
             z-index: 6;
+            backdrop-filter: blur(5px);
         }
         
         .projects-placeholder {
@@ -260,10 +280,11 @@
             padding: 4rem;
             background: var(--card-bg);
             border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
             transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
             transform: scale(0.9);
             opacity: 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .active .projects-placeholder {
@@ -273,8 +294,9 @@
         
         /* Hobbies Section */
         #hobbies {
-            background-color: var(--light);
+            background-color: rgba(18, 18, 18, 0.7);
             z-index: 5;
+            backdrop-filter: blur(5px);
         }
         
         .hobbies-container {
@@ -287,11 +309,12 @@
             background: var(--card-bg);
             padding: 2.5rem;
             border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
             transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
             transform: translateY(30px);
             opacity: 0;
             text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .active .hobby-item {
@@ -407,6 +430,24 @@
             z-index: 1;
         }
         
+        /* Custom X (Twitter) Logo */
+        .fa-x-twitter {
+            display: inline-block;
+            position: relative;
+            width: 1em;
+            height: 1em;
+        }
+        
+        .fa-x-twitter::before {
+            content: "X";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-weight: bold;
+            font-family: 'Poppins', sans-serif;
+        }
+        
         /* Responsive Design */
         @media (max-width: 768px) {
             .nav-dots {
@@ -432,6 +473,9 @@
     </style>
 </head>
 <body>
+    <!-- Anime Particle Background -->
+    <div id="particles-js"></div>
+
     <!-- Navigation Dots -->
     <div class="nav-dots">
         <div class="dot active" data-section="header"></div>
@@ -449,9 +493,9 @@
             <h1>Aditya Bose</h1>
             <p class="tagline">BTech Student | AI/ML Enthusiast | Programmer</p>
             <div class="social-links">
-                <a href="#" class="btn btn-icon"><i class="fab fa-linkedin-in"></i></a>
-                <a href="#" class="btn btn-icon"><i class="fab fa-github"></i></a>
-                <a href="#" class="btn btn-icon"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.linkedin.com/in/aditya-bose-584500256/" class="btn btn-icon" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://github.com/AdityaBose1121" class="btn btn-icon" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://x.com/adityabose11213" class="btn btn-icon" target="_blank"><i class="fa-x-twitter"></i></a>
                 <a href="mailto:your.email@example.com" class="btn btn-icon"><i class="fas fa-envelope"></i></a>
             </div>
             <a href="#about" class="btn scroll-btn">Explore My Journey <i class="fas fa-arrow-down"></i></a>
@@ -536,7 +580,7 @@
                 <h3>My Projects</h3>
                 <p>I'm currently working on building my portfolio of projects. Check back soon to see my work!</p>
                 <p>In the meantime, you can see my learning progress on GitHub.</p>
-                <a href="#" class="btn">My GitHub</a>
+                <a href="https://github.com/AdityaBose1121" class="btn" target="_blank">My GitHub</a>
             </div>
         </div>
     </section>
@@ -591,17 +635,127 @@
             <h2 style="color: white; margin-bottom: 1.5rem;">Let's Connect</h2>
             <p style="margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">Feel free to reach out for collaborations or just to say hello!</p>
             <div class="social-links">
-                <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                <a href="#"><i class="fab fa-github"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.linkedin.com/in/aditya-bose-584500256/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://github.com/AdityaBose1121" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://x.com/adityabose11213" target="_blank"><i class="fa-x-twitter"></i></a>
                 <a href="mailto:your.email@example.com"><i class="fas fa-envelope"></i></a>
             </div>
             <p style="margin-top: 3rem;">&copy; 2023 Aditya Bose. All rights reserved.</p>
         </div>
     </section>
 
+    <!-- Particles.js Library -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    
     <script>
+        // Initialize particles.js
         document.addEventListener('DOMContentLoaded', function() {
+            particlesJS("particles-js", {
+                "particles": {
+                    "number": {
+                        "value": 80,
+                        "density": {
+                            "enable": true,
+                            "value_area": 800
+                        }
+                    },
+                    "color": {
+                        "value": "#6C63FF"
+                    },
+                    "shape": {
+                        "type": "circle",
+                        "stroke": {
+                            "width": 0,
+                            "color": "#000000"
+                        },
+                        "polygon": {
+                            "nb_sides": 5
+                        }
+                    },
+                    "opacity": {
+                        "value": 0.5,
+                        "random": true,
+                        "anim": {
+                            "enable": true,
+                            "speed": 1,
+                            "opacity_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "size": {
+                        "value": 3,
+                        "random": true,
+                        "anim": {
+                            "enable": true,
+                            "speed": 2,
+                            "size_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "line_linked": {
+                        "enable": true,
+                        "distance": 150,
+                        "color": "#6C63FF",
+                        "opacity": 0.4,
+                        "width": 1
+                    },
+                    "move": {
+                        "enable": true,
+                        "speed": 1,
+                        "direction": "none",
+                        "random": true,
+                        "straight": false,
+                        "out_mode": "out",
+                        "bounce": false,
+                        "attract": {
+                            "enable": true,
+                            "rotateX": 600,
+                            "rotateY": 1200
+                        }
+                    }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": {
+                        "onhover": {
+                            "enable": true,
+                            "mode": "grab"
+                        },
+                        "onclick": {
+                            "enable": true,
+                            "mode": "push"
+                        },
+                        "resize": true
+                    },
+                    "modes": {
+                        "grab": {
+                            "distance": 140,
+                            "line_linked": {
+                                "opacity": 1
+                            }
+                        },
+                        "bubble": {
+                            "distance": 400,
+                            "size": 40,
+                            "duration": 2,
+                            "opacity": 8,
+                            "speed": 3
+                        },
+                        "repulse": {
+                            "distance": 200,
+                            "duration": 0.4
+                        },
+                        "push": {
+                            "particles_nb": 4
+                        },
+                        "remove": {
+                            "particles_nb": 2
+                        }
+                    }
+                },
+                "retina_detect": true
+            });
+
             const pages = document.querySelectorAll('.page');
             const dots = document.querySelectorAll('.dot');
             let currentPage = 0;
